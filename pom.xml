@@ -65,8 +65,8 @@
     </dependencyManagement>
     <!-- define source code repository location -->
   <scm>
-    <connection>scm:svn:https://source.sakaiproject.org/contrib/emailtemplateservice/trunk</connection>
-    <developerConnection>scm:svn:https://source.sakaiproject.org/contrib/emailtemplateservice/trunk</developerConnection>
-    <url>https://source.sakaiproject.org/contrib/emailtemplateservice/trunk</url>
+    <connection>scm:svn:https://source.sakaiproject.org/contrib/emailtemplateservice/branches/sakai-2.6.0</connection>
+    <developerConnection>scm:svn:https://source.sakaiproject.org/contrib/emailtemplateservice/branches/sakai-2.6.0</developerConnection>
+    <url>https://source.sakaiproject.org/contrib/emailtemplateservice/branches/sakai-2.6.0</url>
   </scm>
 </project>
