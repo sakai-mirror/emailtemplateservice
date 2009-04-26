@@ -17,7 +17,7 @@
     </organization>
     <inceptionYear>2007</inceptionYear>
     <packaging>pom</packaging>
-    <version>0.4-SNAPSHOT</version><!--emailtemplateservice.version-->
+    <version>0.3</version><!--emailtemplateservice.version-->
 	<properties>
         <rsfutil.version>0.7.3M3</rsfutil.version>
     </properties>
@@ -53,20 +53,20 @@
             <dependency>
                 <groupId>org.sakaiproject.emailtemplateservice</groupId>
                 <artifactId>emailtemplateservice-api</artifactId>
-                <version>0.4-SNAPSHOT</version><!--emailtemplateservice.version-->
+                <version>0.3</version><!--emailtemplateservice.version-->
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.sakaiproject.emailtemplateservice</groupId>
                 <artifactId>emailtemplateservice-impl</artifactId>
-                <version>0.4-SNAPSHOT</version><!--emailtemplateservice.version-->
+                <version>0.3</version><!--emailtemplateservice.version-->
             </dependency>
         </dependencies>
     </dependencyManagement>
     <!-- define source code repository location -->
   <scm>
-    <connection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/branches/sakai-2.6.0</connection>
-    <developerConnection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/branches/sakai-2.6.0</developerConnection>
-    <url>https://source.sakaiproject.org/svn/emailtemplateservice/branches/sakai-2.6.0</url>
+    <connection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.3</connection>
+    <developerConnection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.3</developerConnection>
+    <url>https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.3</url>
   </scm>
 </project>
