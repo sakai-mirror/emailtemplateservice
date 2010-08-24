@@ -1,5 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.sakaiproject</groupId>
+        <artifactId>emailtemplateservice</artifactId>
+        <version>0.3.5-SNAPSHOT</version>
+    </parent>
+    
     <name>Sakai Emailtemplateservice Implementation</name>
     <groupId>org.sakaiproject.emailtemplateservice</groupId>
     <artifactId>emailtemplateservice-impl</artifactId>
@@ -14,19 +22,10 @@
         <deploy.target />
     </properties>
 
-    <!-- the base is parent -->
-    <parent>
-        <groupId>org.sakaiproject</groupId>
-        <artifactId>emailtemplateservice</artifactId>
-        <version>0.3.5-SNAPSHOT</version><!--emailtemplateservice.version-->
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
-
     <dependencies>
-
         <!-- internal dependencies -->
         <dependency>
-            <groupId>org.sakaiproject.emailtemplateservice</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>emailtemplateservice-api</artifactId>
         </dependency>
 
@@ -55,12 +54,12 @@
 
         <!-- Sakai Kernel dependencies -->
         <dependency>
-        	<groupId>org.sakaiproject.kernel</groupId>
-        	<artifactId>sakai-kernel-api</artifactId>
+            <groupId>org.sakaiproject.kernel</groupId>
+            <artifactId>sakai-kernel-api</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.sakaiproject.kernel</groupId>
-        	<artifactId>sakai-component-manager</artifactId>
+            <groupId>org.sakaiproject.kernel</groupId>
+            <artifactId>sakai-component-manager</artifactId>
         </dependency>
 
         <!-- testing dependencies -->
@@ -113,7 +112,6 @@
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>${sakai.ehcache.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -122,21 +120,17 @@
             <artifactId>easymock</artifactId>
             <version>1.2_Java1.3</version>
         </dependency>
-        <!-- 
-            <dependency>
-            <groupId>velocity</groupId>
+        <!--
+            <dependency> <groupId>velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>${sakai.velocity.version}</version>
-            </dependency>
+            <version>${sakai.velocity.version}</version> </dependency>
         -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.11</version>
         </dependency>
-
     </dependencies>
-
 
     <build>
         <resources>
@@ -157,7 +151,7 @@
         </resources>
 
         <!-- unit testing -->
-      
+
         <testResources>
             <testResource>
                 <directory>${basedir}/../../pack/src/webapp/WEB-INF</directory>
@@ -176,5 +170,4 @@
             </testResource>
         </testResources>
     </build>
-
 </project>

@@ -1,5 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.sakaiproject</groupId>
+        <artifactId>emailtemplateservice</artifactId>
+        <version>0.3.5-SNAPSHOT</version>
+    </parent>
+    
     <name>Sakai Emailtemplateservice Tool</name>
     <groupId>org.sakaiproject.emailtemplateservice</groupId>
     <artifactId>emailtemplateservice-tool</artifactId>
@@ -11,14 +18,6 @@
     <description>Emailtemplateservice webapp (tool)</description>
     <packaging>war</packaging>
 
-    <!-- the base is the parent pom -->
-    <parent>
-        <groupId>org.sakaiproject</groupId>
-        <artifactId>emailtemplateservice</artifactId>
-        <version>0.3.5-SNAPSHOT</version><!--emailtemplateservice.version-->
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
     <properties>
         <rsfutil.version>0.7.4</rsfutil.version>
         <sakairsf.sakai.version>2.2.x</sakairsf.sakai.version>
@@ -27,10 +26,9 @@
     </properties>
 
     <dependencies>
-
         <!-- Internal dependencies -->
         <dependency>
-            <groupId>org.sakaiproject.emailtemplateservice</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>emailtemplateservice-api</artifactId>
         </dependency>
 
@@ -74,8 +72,5 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
         </dependency>
-
     </dependencies>
-
-
 </project>
