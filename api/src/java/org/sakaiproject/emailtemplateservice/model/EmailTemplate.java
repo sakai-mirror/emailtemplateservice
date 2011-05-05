@@ -31,7 +31,12 @@ public class EmailTemplate implements java.io.Serializable {
 
    // Fields
 
-   private Long id;
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8697605573015358433L;
+
+	private Long id;
 
    private Date lastModified;
 
