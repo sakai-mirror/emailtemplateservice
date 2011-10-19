@@ -114,6 +114,10 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
       if (key == null || "".equals(key)) {
          throw new IllegalArgumentException("key cannot be null or empty");
       }
+      
+      if(log.isDebugEnabled()) {
+      	log.debug("getEmailTemplate(key=" + key + ", locale=" + locale + ")");
+      }
       EmailTemplate et = null;
       // TODO make this more efficient
       if (locale != null) {
@@ -125,7 +129,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
             et = dao.findOneBySearch(EmailTemplate.class, search);
          }
       }
-      else if (et == null) {
+      if (et == null) {
          et = dao.findOneBySearch(EmailTemplate.class, new Search("key", key));
       }
       if (et == null) {
