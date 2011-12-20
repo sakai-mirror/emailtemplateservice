@@ -29,6 +29,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>emailtemplateservice-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.sakaiproject.entitybroker</groupId>
