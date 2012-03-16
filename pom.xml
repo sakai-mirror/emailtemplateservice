@@ -11,7 +11,7 @@
     <groupId>org.sakaiproject.emailtemplateservice</groupId>
     <artifactId>emailtemplateservice</artifactId>
     <packaging>pom</packaging>
-    <version>0.6.0-b03</version>
+    <version>0.6-SNAPSHOT</version>
     <organization>
         <name>Sakai Project</name>
         <url>http://sakaiproject.org/</url>
@@ -74,9 +74,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.6.0-b03</connection>
-        <developerConnection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.6.0-b03</developerConnection>
-        <url>https://source.sakaiproject.org/svn/emailtemplateservice/tags/emailtemplateservice-0.6.0-b03</url>
+        <connection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/branches/emailtemplateservice-0.6.x</connection>
+        <developerConnection>scm:svn:https://source.sakaiproject.org/svn/emailtemplateservice/branches/emailtemplateservice-0.6.x</developerConnection>
+        <url>https://source.sakaiproject.org/svn/emailtemplateservice/branches/emailtemplateservice-0.6.x</url>
     </scm>
     
     <dependencyManagement>
