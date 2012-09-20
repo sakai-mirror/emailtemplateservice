@@ -35,9 +35,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.component.api.ServerConfigurationService;
@@ -116,7 +117,9 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
 		   search.addRestriction( new Restriction("locale", locale.toString()) );
 		   et = dao.findOneBySearch(EmailTemplate.class, search);
 	   } else {
-		   et = dao.findOneBySearch(EmailTemplate.class, new Search("key", key));
+		   Search search = new Search("key", key);
+		   search.addRestriction( new Restriction("locale", EmailTemplate.DEFAULT_LOCALE) );
+		   et = dao.findOneBySearch(EmailTemplate.class, search);
 	   }
 	   return et;
 	}
@@ -142,7 +145,9 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
          }
       }
       if (et == null) {
-         et = dao.findOneBySearch(EmailTemplate.class, new Search("key", key));
+    	  Search search = new Search("key", key);
+          search.addRestriction( new Restriction("locale", EmailTemplate.DEFAULT_LOCALE) );
+          et = dao.findOneBySearch(EmailTemplate.class, search);
       }
       if (et == null) {
          log.warn("no template found for: " + key + " in locale " + locale );
@@ -219,6 +224,13 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
 	   if (template.getMessage() == null) {
 		   throw new IllegalArgumentException("Template message can't be null");
 	   }
+	   
+	   String locale = template.getLocale(); 
+	   if (locale == null || locale.trim().length() == 0) {
+		   //For backward compatibility set it to default
+		   template.setLocale(EmailTemplate.DEFAULT_LOCALE);
+	   } 
+	   
 	   
       //update the modified date
       template.setLastModified(new Date());
