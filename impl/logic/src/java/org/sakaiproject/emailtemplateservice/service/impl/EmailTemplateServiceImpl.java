@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,6 +60,7 @@ import org.sakaiproject.user.api.PreferencesService;
 import org.sakaiproject.user.api.User;
 import org.sakaiproject.user.api.UserDirectoryService;
 import org.simpleframework.xml.core.Persister;
+import org.springframework.dao.DataIntegrityViolationException;
 
 public class EmailTemplateServiceImpl implements EmailTemplateService {
 
@@ -109,6 +111,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
    }
 
    private EmailTemplate getEmailTemplateNoDefault(String key, Locale locale) {
+	   log.debug("getEmailTemplateNoDefault( " + key +"," + locale);
 	   if (key == null || "".equals(key)) {
 		   throw new IllegalArgumentException("key cannot be null or empty");
 	   }
@@ -160,7 +163,11 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
 	public boolean templateExists(String key, Locale locale) {
 		List<EmailTemplate> et = null;
 		Search search = new Search("key", key);
-		search.addRestriction( new Restriction("locale", locale.toString()) );
+		if (locale == null) {
+			search.addRestriction( new Restriction("locale", EmailTemplate.DEFAULT_LOCALE));
+		} else {
+			search.addRestriction( new Restriction("locale", locale.toString()));
+		}
         et = dao.findBySearch(EmailTemplate.class, search);
         if (et != null && et.size() > 0) {
         	return true;
@@ -235,8 +242,12 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
 	   
       //update the modified date
       template.setLastModified(new Date());
-
-      dao.save(template);
+      try {
+    	  dao.save(template);
+      }
+      catch (DataIntegrityViolationException die) {
+    	  throw new IllegalArgumentException("Key: " + template.getKey() + " and locale: " + template.getLocale() + " in use already", die);
+      }
       log.info("saved template: " + template.getId());
    }
    
@@ -418,7 +429,7 @@ public void sendRenderedMessages(String key, List<String> userReferences,
 
 
 private List<User> getUsersEmail(List<String> userIds) {
-	//we have a group of referenc
+	//we have a group of references
 	List<String> ids = new ArrayList<String>(); 
 	
 	for (int i = 0; i < userIds.size(); i++) {
@@ -455,10 +466,11 @@ private List<User> getUsersEmail(List<String> userIds) {
 
 			//check if we have an existing template of this key and locale
 			//its possible the template has no locale set
+			//The locale could also be the Default
 			Locale loc = null;
-			if (template.getLocale() != null) {
-				loc = new Locale(template.getLocale()); 
-			}
+			if (template.getLocale() != null && !"".equals(template.getLocale()) && !EmailTemplate.DEFAULT_LOCALE.equals(template.getLocale())) {
+				loc = LocaleUtils.toLocale(template.getLocale());
+			} 
 			
 			EmailTemplate existingTemplate = getEmailTemplateNoDefault(template.getKey(), loc);
 			if(existingTemplate == null) {
@@ -535,6 +547,21 @@ private List<User> getUsersEmail(List<String> userIds) {
 		}
 		finally {
 			stream.close();
+		}
+	}
+	
+	/**
+	 * Delete all templates in the Database
+	 * Only used in unit tests so not in API
+	 * TODO rewrite for efficiency 
+	 */
+	public void deleteAllTemplates() {
+		log.debug("deleteAllTemplates");
+		List<EmailTemplate> templates = dao.findAll(EmailTemplate.class);
+		for (int i =0; i < templates.size(); i++) {
+			EmailTemplate template = templates.get(i);
+			log.debug("deleting template: " + template.getId());
+			dao.delete(template);
 		}
 	}
 
