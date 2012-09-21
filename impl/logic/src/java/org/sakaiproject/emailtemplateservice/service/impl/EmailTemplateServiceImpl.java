@@ -41,6 +41,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang.StringUtils;
 import org.sakaiproject.component.api.ServerConfigurationService;
 import org.sakaiproject.email.api.EmailService;
 import org.sakaiproject.emailtemplateservice.dao.impl.EmailTemplateServiceDao;
@@ -385,7 +386,7 @@ public void sendRenderedMessages(String key, List<String> userReferences,
 				// we need to manually construct the headers
 				List<String> headers = new ArrayList<String>();
 				//the template may specify a from address
-				if (rt.getFrom() != null) {
+				if (StringUtils.isNotBlank(rt.getFrom())) {
 					headers.add("From: \"" + rt.getFrom() );
 				} else {
 					headers.add("From: \"" + fromName + "\" <" + fromEmail + ">" );
